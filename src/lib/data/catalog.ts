@@ -15,15 +15,23 @@ export type Company = {
 	reviews: Review[];
 };
 
-export type Card = {
-	id: string;
-	title: string;
-	category: 'Marketing' | 'Design' | 'Development' | 'Analytics';
-	status: 'Active' | 'Paused';
-	description: string;
-	photo: string;
-	companyId: string;
-	reviews: Review[];
+export type PackageCategory = 'Marketing' | 'Design' | 'Development' | 'Analytics';
+
+export type Package = {
+	_id: string;
+	name: string;
+	photo: string | null;
+	description: string | null;
+	category: PackageCategory;
+	count: number;
+	price: number;
+	getTime: number;
+	closeTime: number;
+	active: boolean;
+	rating: number;
+	company: string;
+	createdAt: string;
+	updatedAt: string;
 };
 
 export const companies: Company[] = [
@@ -68,82 +76,105 @@ export const companies: Company[] = [
 	}
 ];
 
-export const cards: Card[] = [
+export const cards: Package[] = [
 	{
-		id: 'growth-accelerator',
-		title: 'Growth Accelerator',
+		_id: 'pkg-growth-accelerator',
+		name: 'Growth Accelerator',
 		category: 'Marketing',
-		status: 'Active',
+		active: true,
 		description: 'Комплексная рекламная кампания для роста заявок в B2B-сегменте.',
 		photo: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80',
-		companyId: 'nova-digital',
-		reviews: [
-			{ id: 'r1', author: 'Анна', rating: 5, comment: 'CTR вырос на 38% за 2 месяца.' },
-			{ id: 'r2', author: 'Павел', rating: 4, comment: 'Хорошо оптимизировали стоимость лида.' }
-		]
+		company: 'nova-digital',
+		count: 12,
+		price: 1200,
+		getTime: 30,
+		closeTime: 90,
+		rating: 4.8,
+		createdAt: '2025-01-10T09:00:00.000Z',
+		updatedAt: '2025-02-12T12:00:00.000Z'
 	},
 	{
-		id: 'brand-refresh',
-		title: 'Brand Refresh',
+		_id: 'pkg-brand-refresh',
+		name: 'Brand Refresh',
 		category: 'Design',
-		status: 'Active',
+		active: true,
 		description: 'Редизайн карточек продукта, иконок и визуальной системы бренда.',
 		photo: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1200&q=80',
-		companyId: 'pixel-forge',
-		reviews: [
-			{ id: 'r3', author: 'Мария', rating: 5, comment: 'Новый дизайн повысил конверсию страницы.' }
-		]
+		company: 'pixel-forge',
+		count: 8,
+		price: 980,
+		getTime: 20,
+		closeTime: 60,
+		rating: 4.9,
+		createdAt: '2025-01-12T08:30:00.000Z',
+		updatedAt: '2025-02-11T14:30:00.000Z'
 	},
 	{
-		id: 'admin-suite',
-		title: 'Admin Suite',
+		_id: 'pkg-admin-suite',
+		name: 'Admin Suite',
 		category: 'Development',
-		status: 'Paused',
+		active: false,
 		description: 'Новый модуль управления пользователями и ролями в админ-панели.',
-		photo: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1200&q=80',
-		companyId: 'codebridge',
-		reviews: [
-			{ id: 'r4', author: 'Дмитрий', rating: 4, comment: 'Функционально, но хочется больше шаблонов отчётов.' }
-		]
+		photo: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6f?auto=format&fit=crop&w=1200&q=80',
+		company: 'codebridge',
+		count: 4,
+		price: 2400,
+		getTime: 45,
+		closeTime: 120,
+		rating: 4.2,
+		createdAt: '2025-01-15T10:00:00.000Z',
+		updatedAt: '2025-02-10T16:10:00.000Z'
 	},
 	{
-		id: 'funnel-audit',
-		title: 'Funnel Audit',
+		_id: 'pkg-funnel-audit',
+		name: 'Funnel Audit',
 		category: 'Analytics',
-		status: 'Active',
+		active: true,
 		description: 'Анализ воронки продаж с рекомендациями по оптимизации каждого этапа.',
 		photo: 'https://images.unsplash.com/photo-1551281044-8b9a4b1f6a2f?auto=format&fit=crop&w=1200&q=80',
-		companyId: 'nova-digital',
-		reviews: [
-			{ id: 'r5', author: 'Елена', rating: 5, comment: 'Полезные инсайты и очень структурированный отчёт.' }
-		]
+		company: 'nova-digital',
+		count: 20,
+		price: 650,
+		getTime: 15,
+		closeTime: 40,
+		rating: 4.7,
+		createdAt: '2025-01-18T11:15:00.000Z',
+		updatedAt: '2025-02-13T09:25:00.000Z'
 	},
 	{
-		id: 'mobile-ui-kit',
-		title: 'Mobile UI Kit',
+		_id: 'pkg-mobile-ui-kit',
+		name: 'Mobile UI Kit',
 		category: 'Design',
-		status: 'Paused',
+		active: false,
 		description: 'Библиотека компонентов для мобильного приложения и дизайн-гайд.',
 		photo: 'https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=1200&q=80',
-		companyId: 'pixel-forge',
-		reviews: [
-			{ id: 'r6', author: 'Наталья', rating: 4, comment: 'Быстро стартовали дизайн системы.' }
-		]
+		company: 'pixel-forge',
+		count: 6,
+		price: 740,
+		getTime: 25,
+		closeTime: 70,
+		rating: 4.4,
+		createdAt: '2025-01-22T13:20:00.000Z',
+		updatedAt: '2025-02-09T10:45:00.000Z'
 	},
 	{
-		id: 'api-modernization',
-		title: 'API Modernization',
+		_id: 'pkg-api-modernization',
+		name: 'API Modernization',
 		category: 'Development',
-		status: 'Active',
+		active: true,
 		description: 'Рефакторинг API и внедрение мониторинга производительности.',
 		photo: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80',
-		companyId: 'codebridge',
-		reviews: [
-			{ id: 'r7', author: 'Игорь', rating: 5, comment: 'Стабильность сервиса заметно выросла.' }
-		]
+		company: 'codebridge',
+		count: 10,
+		price: 1900,
+		getTime: 35,
+		closeTime: 95,
+		rating: 5,
+		createdAt: '2025-01-27T07:55:00.000Z',
+		updatedAt: '2025-02-14T08:00:00.000Z'
 	}
 ];
 
 export const getCompanyById = (id: string) => companies.find((company) => company.id === id);
 
-export const getCardById = (id: string) => cards.find((card) => card.id === id);
+export const getCardById = (id: string) => cards.find((card) => card._id === id);

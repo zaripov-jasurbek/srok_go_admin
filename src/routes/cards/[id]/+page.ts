@@ -5,10 +5,10 @@ export const load = ({ params }) => {
 	const card = getCardById(params.id);
 
 	if (!card) {
-		throw error(404, 'Card not found');
+		throw error(404, 'Package not found');
 	}
 
-	const company = getCompanyById(card.companyId);
+	const company = getCompanyById(card.company);
 
 	if (!company) {
 		throw error(404, 'Company not found');

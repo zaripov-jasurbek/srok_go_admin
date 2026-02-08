@@ -23,9 +23,9 @@
 		<h2 class="mb-4 text-2xl font-semibold text-slate-900">Карточки компании</h2>
 		<div class="grid gap-3 md:grid-cols-2">
 			{#each data.companyCards as card}
-				<a href={`/cards/${card.id}`} class="rounded-xl border border-slate-200 p-4 hover:bg-slate-50">
-					<p class="font-medium text-slate-900">{card.title}</p>
-					<p class="text-sm text-slate-500">{card.category}</p>
+				<a href={`/cards/${card._id}`} class="rounded-xl border border-slate-200 p-4 hover:bg-slate-50">
+					<p class="font-medium text-slate-900">{card.name}</p>
+					<p class="text-sm text-slate-500">{card.category} · ${card.price}</p>
 				</a>
 			{/each}
 		</div>
