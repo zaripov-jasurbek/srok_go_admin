@@ -3,12 +3,20 @@
 >
 	<h1 class="text-4xl font-bold text-slate-900">Каталог Cards</h1>
 	<p class="text-lg text-slate-600">
-		Откройте страницу карточек с поиском, фильтрами и пагинацией.
+		Откройте страницы карточек и компаний с поиском, фильтрами и пагинацией.
 	</p>
-	<a
-		href="/cards"
-		class="rounded-lg bg-slate-900 px-6 py-3 text-base font-medium text-white transition hover:bg-slate-700"
-	>
-		Перейти к cards
-	</a>
+	<div class="flex flex-wrap items-center justify-center gap-3">
+		<a
+			href="/cards"
+			class="rounded-lg bg-slate-900 px-6 py-3 text-base font-medium text-white transition hover:bg-slate-700"
+		>
+			Перейти к cards
+		</a>
+		<a
+			href="/companies"
+			class="rounded-lg border border-slate-300 bg-white px-6 py-3 text-base font-medium text-slate-900 transition hover:bg-slate-100"
+		>
+			Перейти к companies
+		</a>
+	</div>
 </main>
