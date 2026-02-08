@@ -8,14 +8,20 @@
 	<article class="mt-4 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
 		<img src={data.company.photo} alt={data.company.name} class="h-64 w-full object-cover" />
 		<div class="space-y-4 p-6">
-			<div class="flex items-center gap-4">
-				<img src={data.company.logo} alt={data.company.name} class="h-16 w-16 rounded-full object-cover" />
-				<div>
-					<h1 class="text-3xl font-bold text-slate-900">{data.company.name}</h1>
-					<p class="text-slate-500">{data.company.industry}</p>
-				</div>
+			<div>
+				<h1 class="text-3xl font-bold text-slate-900">{data.company.name}</h1>
+				<p class="mt-1 text-slate-500">{data.company.category} · {data.company.region}</p>
 			</div>
-			<p class="text-slate-600">{data.company.description}</p>
+			<p class="text-slate-600">{data.company.description || 'Описание отсутствует'}</p>
+
+			<div class="grid gap-3 rounded-xl bg-slate-50 p-4 text-sm text-slate-700 md:grid-cols-2">
+				<p><span class="font-semibold">Rating:</span> {data.company.rating.toFixed(1)} / 5</p>
+				<p><span class="font-semibold">Working hours:</span> {data.company.OpenTime}:00 - {data.company.CloseTime}:00</p>
+				<p><span class="font-semibold">Coordinates:</span> {data.company.coordination[0]}, {data.company.coordination[1]}</p>
+				<p><span class="font-semibold">Region:</span> {data.company.region}</p>
+				<p><span class="font-semibold">Created:</span> {new Date(data.company.createdAt).toLocaleDateString()}</p>
+				<p><span class="font-semibold">Updated:</span> {new Date(data.company.updatedAt).toLocaleDateString()}</p>
+			</div>
 		</div>
 	</article>
 
@@ -27,21 +33,6 @@
 					<p class="font-medium text-slate-900">{card.name}</p>
 					<p class="text-sm text-slate-500">{card.category} · ${card.price}</p>
 				</a>
-			{/each}
-		</div>
-	</section>
-
-	<section class="mt-8">
-		<h2 class="mb-4 text-2xl font-semibold text-slate-900">Отзывы о компании</h2>
-		<div class="space-y-3">
-			{#each data.company.reviews as review}
-				<article class="rounded-xl border border-slate-200 p-4">
-					<div class="flex items-center justify-between">
-						<p class="font-medium text-slate-800">{review.author}</p>
-						<p class="text-amber-500">{'★'.repeat(review.rating)}</p>
-					</div>
-					<p class="mt-2 text-sm text-slate-600">{review.comment}</p>
-				</article>
 			{/each}
 		</div>
 	</section>

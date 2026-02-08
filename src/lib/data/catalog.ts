@@ -1,18 +1,16 @@
-export type Review = {
-	id: string;
-	author: string;
-	rating: number;
-	comment: string;
-};
-
 export type Company = {
-	id: string;
+	_id: string;
 	name: string;
-	industry: string;
 	description: string;
-	logo: string;
 	photo: string;
-	reviews: Review[];
+	OpenTime: number;
+	CloseTime: number;
+	category: string;
+	rating: number;
+	coordination: [number, number];
+	region: string;
+	createdAt: string;
+	updatedAt: string;
 };
 
 export type PackageCategory = 'Marketing' | 'Design' | 'Development' | 'Analytics';
@@ -36,43 +34,52 @@ export type Package = {
 
 export const companies: Company[] = [
 	{
-		id: 'nova-digital',
+		_id: '67ca1dfe12d3b9ea8f5a1001',
 		name: 'Nova Digital',
-		industry: 'Digital Marketing',
 		description:
 			'Агентство полного цикла: performance-маркетинг, контент-стратегия и поддержка брендов в социальных сетях.',
-		logo: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=120&q=80',
-		photo: 'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80',
-		reviews: [
-			{ id: 'c1r1', author: 'Ирина', rating: 5, comment: 'Надёжный партнёр, всегда в срок.' },
-			{ id: 'c1r2', author: 'Максим', rating: 4, comment: 'Сильная аналитика и понятные отчёты.' }
-		]
+		photo:
+			'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80',
+		OpenTime: 9,
+		CloseTime: 19,
+		category: 'Marketing',
+		rating: 4.8,
+		coordination: [55.7558, 37.6173],
+		region: 'Moscow',
+		createdAt: '2025-01-10T09:00:00.000Z',
+		updatedAt: '2025-02-12T12:00:00.000Z'
 	},
 	{
-		id: 'pixel-forge',
+		_id: '67ca1dfe12d3b9ea8f5a1002',
 		name: 'Pixel Forge',
-		industry: 'UI/UX Design',
 		description:
 			'Команда дизайнеров, которая проектирует интерфейсы и брендовые решения для веб и мобильных продуктов.',
-		logo: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=120&q=80',
-		photo: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80',
-		reviews: [
-			{ id: 'c2r1', author: 'Леонид', rating: 5, comment: 'Очень аккуратные и современные макеты.' },
-			{ id: 'c2r2', author: 'Жанна', rating: 5, comment: 'Отличная коммуникация на всех этапах.' }
-		]
+		photo:
+			'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80',
+		OpenTime: 10,
+		CloseTime: 20,
+		category: 'Design',
+		rating: 4.9,
+		coordination: [59.9343, 30.3351],
+		region: 'Saint Petersburg',
+		createdAt: '2025-01-12T08:30:00.000Z',
+		updatedAt: '2025-02-11T14:30:00.000Z'
 	},
 	{
-		id: 'codebridge',
+		_id: '67ca1dfe12d3b9ea8f5a1003',
 		name: 'CodeBridge',
-		industry: 'Software Development',
 		description:
 			'Разработка SaaS-платформ, интеграций и внутренних админ-панелей с фокусом на масштабируемость.',
-		logo: 'https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=120&q=80',
-		photo: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80',
-		reviews: [
-			{ id: 'c3r1', author: 'Сергей', rating: 5, comment: 'Качественный код и прозрачный процесс.' },
-			{ id: 'c3r2', author: 'Ольга', rating: 4, comment: 'Быстро подключились и закрыли задачи.' }
-		]
+		photo:
+			'https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80',
+		OpenTime: 8,
+		CloseTime: 18,
+		category: 'Development',
+		rating: 4.6,
+		coordination: [56.8389, 60.6057],
+		region: 'Yekaterinburg',
+		createdAt: '2025-01-15T10:00:00.000Z',
+		updatedAt: '2025-02-10T16:10:00.000Z'
 	}
 ];
 
@@ -84,7 +91,7 @@ export const cards: Package[] = [
 		active: true,
 		description: 'Комплексная рекламная кампания для роста заявок в B2B-сегменте.',
 		photo: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80',
-		company: 'nova-digital',
+		company: '67ca1dfe12d3b9ea8f5a1001',
 		count: 12,
 		price: 1200,
 		getTime: 30,
@@ -100,7 +107,7 @@ export const cards: Package[] = [
 		active: true,
 		description: 'Редизайн карточек продукта, иконок и визуальной системы бренда.',
 		photo: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1200&q=80',
-		company: 'pixel-forge',
+		company: '67ca1dfe12d3b9ea8f5a1002',
 		count: 8,
 		price: 980,
 		getTime: 20,
@@ -116,7 +123,7 @@ export const cards: Package[] = [
 		active: false,
 		description: 'Новый модуль управления пользователями и ролями в админ-панели.',
 		photo: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6f?auto=format&fit=crop&w=1200&q=80',
-		company: 'codebridge',
+		company: '67ca1dfe12d3b9ea8f5a1003',
 		count: 4,
 		price: 2400,
 		getTime: 45,
@@ -132,7 +139,7 @@ export const cards: Package[] = [
 		active: true,
 		description: 'Анализ воронки продаж с рекомендациями по оптимизации каждого этапа.',
 		photo: 'https://images.unsplash.com/photo-1551281044-8b9a4b1f6a2f?auto=format&fit=crop&w=1200&q=80',
-		company: 'nova-digital',
+		company: '67ca1dfe12d3b9ea8f5a1001',
 		count: 20,
 		price: 650,
 		getTime: 15,
@@ -148,7 +155,7 @@ export const cards: Package[] = [
 		active: false,
 		description: 'Библиотека компонентов для мобильного приложения и дизайн-гайд.',
 		photo: 'https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=1200&q=80',
-		company: 'pixel-forge',
+		company: '67ca1dfe12d3b9ea8f5a1002',
 		count: 6,
 		price: 740,
 		getTime: 25,
@@ -164,7 +171,7 @@ export const cards: Package[] = [
 		active: true,
 		description: 'Рефакторинг API и внедрение мониторинга производительности.',
 		photo: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80',
-		company: 'codebridge',
+		company: '67ca1dfe12d3b9ea8f5a1003',
 		count: 10,
 		price: 1900,
 		getTime: 35,
@@ -175,6 +182,6 @@ export const cards: Package[] = [
 	}
 ];
 
-export const getCompanyById = (id: string) => companies.find((company) => company.id === id);
+export const getCompanyById = (id: string) => companies.find((company) => company._id === id);
 
 export const getCardById = (id: string) => cards.find((card) => card._id === id);

@@ -33,7 +33,7 @@
 
 			<div class="rounded-xl bg-slate-50 p-4">
 				<p class="text-sm text-slate-600">Компания:</p>
-				<a href={`/companies/${data.company.id}`} class="text-lg font-semibold text-indigo-700 hover:underline"
+				<a href={`/companies/${data.company._id}`} class="text-lg font-semibold text-indigo-700 hover:underline"
 					>{data.company.name}</a
 				>
 			</div>

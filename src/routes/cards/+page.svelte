@@ -34,7 +34,7 @@
 	$: paginatedCards = filteredCards.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
 	const getCompanyName = (companyId: string) =>
-		companies.find((company) => company.id === companyId)?.name ?? 'Unknown';
+		companies.find((company) => company._id === companyId)?.name ?? 'Unknown';
 
 	const resetPage = () => {
 		currentPage = 1;
