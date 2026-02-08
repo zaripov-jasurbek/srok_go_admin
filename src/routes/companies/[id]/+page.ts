@@ -8,7 +8,7 @@ export const load = ({ params }) => {
 		throw error(404, 'Company not found');
 	}
 
-	const companyCards = cards.filter((card) => card.companyId === company.id);
+	const companyCards = cards.filter((card) => card.company === company.id);
 
 	return { company, companyCards };
 };

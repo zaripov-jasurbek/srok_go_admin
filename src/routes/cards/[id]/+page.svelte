@@ -3,39 +3,40 @@
 </script>
 
 <main class="mx-auto min-h-screen max-w-4xl px-5 py-10">
-	<a href="/cards" class="text-sm font-medium text-slate-500 hover:text-slate-800">← Назад к cards</a>
+	<a href="/cards" class="text-sm font-medium text-slate-500 hover:text-slate-800">← Назад к packages</a>
 
 	<article class="mt-4 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-		<img src={data.card.photo} alt={data.card.title} class="h-64 w-full object-cover" />
+		<img
+			src={data.card.photo ?? 'https://placehold.co/1200x600/e2e8f0/475569?text=No+Photo'}
+			alt={data.card.name}
+			class="h-64 w-full object-cover"
+		/>
 		<div class="space-y-4 p-6">
 			<div class="flex flex-wrap items-center gap-3">
-				<h1 class="text-3xl font-bold text-slate-900">{data.card.title}</h1>
+				<h1 class="text-3xl font-bold text-slate-900">{data.card.name}</h1>
 				<span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700"
-					>{data.card.status}</span
+					>{data.card.active ? 'Active' : 'Paused'}</span
 				>
 			</div>
-			<p class="text-slate-600">{data.card.description}</p>
+			<p class="text-slate-600">{data.card.description ?? 'Описание отсутствует'}</p>
+
+			<div class="grid gap-3 rounded-xl bg-slate-50 p-4 text-sm text-slate-700 md:grid-cols-2">
+				<p><span class="font-semibold">Category:</span> {data.card.category}</p>
+				<p><span class="font-semibold">Price:</span> ${data.card.price}</p>
+				<p><span class="font-semibold">Count:</span> {data.card.count}</p>
+				<p><span class="font-semibold">Rating:</span> {data.card.rating.toFixed(1)} / 5</p>
+				<p><span class="font-semibold">Get Time:</span> {data.card.getTime} min</p>
+				<p><span class="font-semibold">Close Time:</span> {data.card.closeTime} min</p>
+				<p><span class="font-semibold">Created:</span> {new Date(data.card.createdAt).toLocaleDateString()}</p>
+				<p><span class="font-semibold">Updated:</span> {new Date(data.card.updatedAt).toLocaleDateString()}</p>
+			</div>
+
 			<div class="rounded-xl bg-slate-50 p-4">
-				<p class="text-sm text-slate-600">Компания создатель:</p>
+				<p class="text-sm text-slate-600">Компания:</p>
 				<a href={`/companies/${data.company.id}`} class="text-lg font-semibold text-indigo-700 hover:underline"
 					>{data.company.name}</a
 				>
 			</div>
 		</div>
 	</article>
-
-	<section class="mt-8">
-		<h2 class="mb-4 text-2xl font-semibold text-slate-900">Отзывы</h2>
-		<div class="space-y-3">
-			{#each data.card.reviews as review}
-				<article class="rounded-xl border border-slate-200 p-4">
-					<div class="flex items-center justify-between">
-						<p class="font-medium text-slate-800">{review.author}</p>
-						<p class="text-amber-500">{'★'.repeat(review.rating)}</p>
-					</div>
-					<p class="mt-2 text-sm text-slate-600">{review.comment}</p>
-				</article>
-			{/each}
-		</div>
-	</section>
 </main>
