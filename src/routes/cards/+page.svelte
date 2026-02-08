@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { cards, companies } from '$lib/data/catalog';
+	import { orderStore } from '$lib/stores/order-store';
 
 	const pageSize = 4;
 	const categories = ['All', 'Marketing', 'Design', 'Development', 'Analytics'] as const;
@@ -11,6 +12,7 @@
 	let minPrice = '';
 	let maxPrice = '';
 	let currentPage = 1;
+	let orderCountByPackage: Record<string, number> = {};
 
 	$: normalizedMinPrice = minPrice === '' ? null : Number(minPrice);
 	$: normalizedMaxPrice = maxPrice === '' ? null : Number(maxPrice);
@@ -35,6 +37,52 @@
 
 	const getCompanyName = (companyId: string) =>
 		companies.find((company) => company._id === companyId)?.name ?? 'Unknown';
+
+	const getOrderCount = (packageId: string) => orderCountByPackage[packageId] ?? 1;
+
+	const incrementOrderCount = (packageId: string) => {
+		orderCountByPackage = {
+			...orderCountByPackage,
+			[packageId]: Math.min(99, getOrderCount(packageId) + 1)
+		};
+	};
+
+	const decrementOrderCount = (packageId: string) => {
+		orderCountByPackage = {
+			...orderCountByPackage,
+			[packageId]: Math.max(1, getOrderCount(packageId) - 1)
+		};
+	};
+
+	const setOrderCount = (packageId: string, value: string) => {
+		const parsed = Number(value);
+		orderCountByPackage = {
+			...orderCountByPackage,
+			[packageId]: Number.isFinite(parsed) && parsed >= 1 ? Math.floor(parsed) : 1
+		};
+	};
+
+	const addToBasket = (packageId: string) => {
+		const card = cards.find((item) => item._id === packageId);
+
+		if (!card) {
+			return;
+		}
+
+		orderStore.create({
+			package: card._id,
+			company: card.company,
+			user: orderStore.fallbackUserId,
+			description: card.description ?? card.name,
+			coordination: [0, 0],
+			count: getOrderCount(packageId)
+		});
+
+		orderCountByPackage = {
+			...orderCountByPackage,
+			[packageId]: 1
+		};
+	};
 
 	const resetPage = () => {
 		currentPage = 1;
@@ -141,6 +189,40 @@
 							<span>Close: {card.closeTime}m</span>
 						</div>
 						<div class="text-sm text-slate-500">Company: {getCompanyName(card.company)}</div>
+
+						<div class="flex flex-wrap items-center gap-2 rounded-lg bg-slate-50 p-3">
+							<div class="flex items-center gap-2">
+								<button
+									type="button"
+									onclick={() => decrementOrderCount(card._id)}
+									class="h-9 w-9 rounded-lg border border-slate-300 text-lg font-medium text-slate-700 hover:bg-white"
+								>
+									−
+								</button>
+								<input
+									type="number"
+									min="1"
+									value={getOrderCount(card._id)}
+									oninput={(event) => setOrderCount(card._id, event.currentTarget.value)}
+									class="w-16 rounded-lg border-slate-300 text-center"
+								/>
+								<button
+									type="button"
+									onclick={() => incrementOrderCount(card._id)}
+									class="h-9 w-9 rounded-lg border border-slate-300 text-lg font-medium text-slate-700 hover:bg-white"
+								>
+									+
+								</button>
+							</div>
+							<button
+								type="button"
+								onclick={() => addToBasket(card._id)}
+								class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-indigo-500"
+							>
+								Add to basket
+							</button>
+						</div>
+
 						<a
 							href={`/cards/${card._id}`}
 							class="inline-block rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-700"

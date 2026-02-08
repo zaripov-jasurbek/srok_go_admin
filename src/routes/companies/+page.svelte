@@ -46,9 +46,7 @@
 		const lat1 = toRadians(first[0]);
 		const lat2 = toRadians(second[0]);
 
-		const a =
-			Math.sin(dLat / 2) ** 2 +
-			Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon / 2) ** 2;
+		const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon / 2) ** 2;
 
 		return earthRadiusKm * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 	};
@@ -157,7 +155,8 @@
 		<p class="mb-4 text-sm text-slate-500">Определяем вашу текущую локацию…</p>
 	{:else if locationState === 'unavailable'}
 		<p class="mb-4 text-sm text-amber-600">
-			Не удалось получить геолокацию. byRange не применяется, пока браузер не вернёт текущие координаты.
+			Не удалось получить геолокацию. byRange не применяется, пока браузер не вернёт текущие
+			координаты.
 		</p>
 	{/if}
 
