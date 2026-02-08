@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import { getCardById, getCompanyById } from '$lib/data/catalog';
+import { getCardById, getCommentsByPackage, getCompanyById } from '$lib/data/catalog';
 
 export const load = ({ params }) => {
 	const card = getCardById(params.id);
@@ -14,5 +14,7 @@ export const load = ({ params }) => {
 		throw error(404, 'Company not found');
 	}
 
-	return { card, company };
+	const comments = getCommentsByPackage(card._id);
+
+	return { card, company, comments };
 };

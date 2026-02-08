@@ -1,9 +1,13 @@
 <script lang="ts">
+	import CommentThread from '$lib/components/CommentThread.svelte';
+
 	let { data } = $props();
 </script>
 
 <main class="mx-auto min-h-screen max-w-4xl px-5 py-10">
-	<a href="/cards" class="text-sm font-medium text-slate-500 hover:text-slate-800">← Назад к packages</a>
+	<a href="/cards" class="text-sm font-medium text-slate-500 hover:text-slate-800"
+		>← Назад к packages</a
+	>
 
 	<article class="mt-4 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
 		<img
@@ -27,16 +31,25 @@
 				<p><span class="font-semibold">Rating:</span> {data.card.rating.toFixed(1)} / 5</p>
 				<p><span class="font-semibold">Get Time:</span> {data.card.getTime} min</p>
 				<p><span class="font-semibold">Close Time:</span> {data.card.closeTime} min</p>
-				<p><span class="font-semibold">Created:</span> {new Date(data.card.createdAt).toLocaleDateString()}</p>
-				<p><span class="font-semibold">Updated:</span> {new Date(data.card.updatedAt).toLocaleDateString()}</p>
+				<p>
+					<span class="font-semibold">Created:</span>
+					{new Date(data.card.createdAt).toLocaleDateString()}
+				</p>
+				<p>
+					<span class="font-semibold">Updated:</span>
+					{new Date(data.card.updatedAt).toLocaleDateString()}
+				</p>
 			</div>
 
 			<div class="rounded-xl bg-slate-50 p-4">
 				<p class="text-sm text-slate-600">Компания:</p>
-				<a href={`/companies/${data.company._id}`} class="text-lg font-semibold text-indigo-700 hover:underline"
-					>{data.company.name}</a
+				<a
+					href={`/companies/${data.company._id}`}
+					class="text-lg font-semibold text-indigo-700 hover:underline">{data.company.name}</a
 				>
 			</div>
 		</div>
 	</article>
+
+	<CommentThread comments={data.comments} title="Отзывы о package" />
 </main>

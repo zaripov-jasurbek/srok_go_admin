@@ -90,7 +90,8 @@ export const cards: Package[] = [
 		category: 'Marketing',
 		active: true,
 		description: 'Комплексная рекламная кампания для роста заявок в B2B-сегменте.',
-		photo: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80',
+		photo:
+			'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80',
 		company: '67ca1dfe12d3b9ea8f5a1001',
 		count: 12,
 		price: 1200,
@@ -106,7 +107,8 @@ export const cards: Package[] = [
 		category: 'Design',
 		active: true,
 		description: 'Редизайн карточек продукта, иконок и визуальной системы бренда.',
-		photo: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1200&q=80',
+		photo:
+			'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1200&q=80',
 		company: '67ca1dfe12d3b9ea8f5a1002',
 		count: 8,
 		price: 980,
@@ -122,7 +124,8 @@ export const cards: Package[] = [
 		category: 'Development',
 		active: false,
 		description: 'Новый модуль управления пользователями и ролями в админ-панели.',
-		photo: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6f?auto=format&fit=crop&w=1200&q=80',
+		photo:
+			'https://images.unsplash.com/photo-1461749280684-dccba630e2f6f?auto=format&fit=crop&w=1200&q=80',
 		company: '67ca1dfe12d3b9ea8f5a1003',
 		count: 4,
 		price: 2400,
@@ -138,7 +141,8 @@ export const cards: Package[] = [
 		category: 'Analytics',
 		active: true,
 		description: 'Анализ воронки продаж с рекомендациями по оптимизации каждого этапа.',
-		photo: 'https://images.unsplash.com/photo-1551281044-8b9a4b1f6a2f?auto=format&fit=crop&w=1200&q=80',
+		photo:
+			'https://images.unsplash.com/photo-1551281044-8b9a4b1f6a2f?auto=format&fit=crop&w=1200&q=80',
 		company: '67ca1dfe12d3b9ea8f5a1001',
 		count: 20,
 		price: 650,
@@ -154,7 +158,8 @@ export const cards: Package[] = [
 		category: 'Design',
 		active: false,
 		description: 'Библиотека компонентов для мобильного приложения и дизайн-гайд.',
-		photo: 'https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=1200&q=80',
+		photo:
+			'https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=1200&q=80',
 		company: '67ca1dfe12d3b9ea8f5a1002',
 		count: 6,
 		price: 740,
@@ -170,7 +175,8 @@ export const cards: Package[] = [
 		category: 'Development',
 		active: true,
 		description: 'Рефакторинг API и внедрение мониторинга производительности.',
-		photo: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80',
+		photo:
+			'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80',
 		company: '67ca1dfe12d3b9ea8f5a1003',
 		count: 10,
 		price: 1900,
@@ -185,3 +191,109 @@ export const cards: Package[] = [
 export const getCompanyById = (id: string) => companies.find((company) => company._id === id);
 
 export const getCardById = (id: string) => cards.find((card) => card._id === id);
+
+export type ReactionType = 'like' | 'dislike';
+
+export type ReactionHistoryEntry = {
+	userName: string;
+	reaction: ReactionType;
+	at: string;
+};
+
+export type Comment = {
+	_id: string;
+	userName: string;
+	package: string | null;
+	company: string | null;
+	parentId: string | null;
+	text: string;
+	likesCount: number;
+	dislikesCount: number;
+	rating: number | null;
+	createdAt: string;
+	reactionHistory: ReactionHistoryEntry[];
+};
+
+export const comments: Comment[] = [
+	{
+		_id: 'cmt-001',
+		userName: 'Aida K.',
+		package: 'pkg-growth-accelerator',
+		company: null,
+		parentId: null,
+		text: 'Пакет помог увеличить лиды за первый месяц. Удобный отчёт и понятные рекомендации.',
+		likesCount: 5,
+		dislikesCount: 1,
+		rating: 5,
+		createdAt: '2025-02-01T09:40:00.000Z',
+		reactionHistory: [
+			{ userName: 'Timur', reaction: 'like', at: '2025-02-01T10:15:00.000Z' },
+			{ userName: 'Svetlana', reaction: 'like', at: '2025-02-01T11:00:00.000Z' },
+			{ userName: 'Arman', reaction: 'dislike', at: '2025-02-01T13:22:00.000Z' }
+		]
+	},
+	{
+		_id: 'cmt-002',
+		userName: 'Manager Nova',
+		package: 'pkg-growth-accelerator',
+		company: null,
+		parentId: 'cmt-001',
+		text: 'Спасибо за отзыв! Уже готовим обновление с новыми шаблонами отчётов.',
+		likesCount: 2,
+		dislikesCount: 0,
+		rating: null,
+		createdAt: '2025-02-01T12:30:00.000Z',
+		reactionHistory: [{ userName: 'Aida K.', reaction: 'like', at: '2025-02-01T12:50:00.000Z' }]
+	},
+	{
+		_id: 'cmt-003',
+		userName: 'Rustam T.',
+		package: null,
+		company: '67ca1dfe12d3b9ea8f5a1002',
+		parentId: null,
+		text: 'Команда быстро отвечает, дизайн-решения качественные, но дедлайн один раз сдвигали.',
+		likesCount: 4,
+		dislikesCount: 1,
+		rating: 4,
+		createdAt: '2025-02-03T08:20:00.000Z',
+		reactionHistory: [
+			{ userName: 'Nina', reaction: 'like', at: '2025-02-03T09:02:00.000Z' },
+			{ userName: 'Bek', reaction: 'like', at: '2025-02-03T10:18:00.000Z' },
+			{ userName: 'Aliya', reaction: 'dislike', at: '2025-02-03T12:47:00.000Z' }
+		]
+	},
+	{
+		_id: 'cmt-004',
+		userName: 'Pixel Forge PM',
+		package: null,
+		company: '67ca1dfe12d3b9ea8f5a1002',
+		parentId: 'cmt-003',
+		text: 'Да, тогда перенесли на 1 день из-за правок. Сейчас усилили контроль сроков 🙌',
+		likesCount: 3,
+		dislikesCount: 0,
+		rating: null,
+		createdAt: '2025-02-03T13:10:00.000Z',
+		reactionHistory: [{ userName: 'Rustam T.', reaction: 'like', at: '2025-02-03T14:01:00.000Z' }]
+	},
+	{
+		_id: 'cmt-005',
+		userName: 'Rustam T.',
+		package: null,
+		company: '67ca1dfe12d3b9ea8f5a1002',
+		parentId: 'cmt-004',
+		text: 'Отлично, спасибо за прозрачность и обратную связь.',
+		likesCount: 1,
+		dislikesCount: 0,
+		rating: null,
+		createdAt: '2025-02-03T15:05:00.000Z',
+		reactionHistory: [
+			{ userName: 'Pixel Forge PM', reaction: 'like', at: '2025-02-03T15:20:00.000Z' }
+		]
+	}
+];
+
+export const getCommentsByPackage = (packageId: string) =>
+	comments.filter((comment) => comment.package === packageId);
+
+export const getCommentsByCompany = (companyId: string) =>
+	comments.filter((comment) => comment.company === companyId);
