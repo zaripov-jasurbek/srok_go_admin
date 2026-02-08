@@ -32,6 +32,32 @@ export type Package = {
 	updatedAt: string;
 };
 
+export type User = {
+	_id: string;
+	createdAt: string;
+	updatedAt: string;
+	name: string;
+	about?: string;
+	avatar?: string;
+	email?: string;
+	phone?: string;
+	rating: number;
+};
+
+export const currentUser: User = {
+	_id: 'usr-admin-001',
+	createdAt: '2024-11-02T09:30:00.000Z',
+	updatedAt: '2025-02-14T14:00:00.000Z',
+	name: 'Aruzhan N.',
+	about:
+		'Веду операционную часть в Srok: проверяю карточки, отвечаю на отзывы и координирую работу с компаниями.',
+	avatar:
+		'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80',
+	email: 'aruzhan@srok.io',
+	phone: '+7 700 123 45 67',
+	rating: 4.9
+};
+
 export const companies: Company[] = [
 	{
 		_id: '67ca1dfe12d3b9ea8f5a1001',
@@ -205,6 +231,7 @@ export type Comment = {
 	userName: string;
 	package: string | null;
 	company: string | null;
+	profile?: string | null;
 	parentId: string | null;
 	text: string;
 	likesCount: number;
@@ -215,6 +242,80 @@ export type Comment = {
 };
 
 export const comments: Comment[] = [
+	{
+		_id: 'cmt-008',
+		userName: 'Samat B.',
+		package: null,
+		company: null,
+		profile: 'usr-admin-001',
+		parentId: null,
+		text: 'Очень оперативно отвечает в чате и всегда подробно объясняет, что исправить в карточке.',
+		likesCount: 7,
+		dislikesCount: 0,
+		rating: 5,
+		createdAt: '2025-02-05T08:10:00.000Z',
+		reactionHistory: [
+			{ userName: 'Ainur', reaction: 'like', at: '2025-02-05T08:40:00.000Z' },
+			{ userName: 'Bekzod', reaction: 'like', at: '2025-02-05T09:05:00.000Z' }
+		]
+	},
+	{
+		_id: 'cmt-009',
+		userName: 'Aruzhan N.',
+		package: null,
+		company: null,
+		profile: 'usr-admin-001',
+		parentId: 'cmt-008',
+		text: 'Спасибо большое! Рада, что обратная связь полезна 🙌',
+		likesCount: 3,
+		dislikesCount: 0,
+		rating: null,
+		createdAt: '2025-02-05T09:20:00.000Z',
+		reactionHistory: [{ userName: 'Samat B.', reaction: 'like', at: '2025-02-05T09:30:00.000Z' }]
+	},
+	{
+		_id: 'cmt-010',
+		userName: 'Nova Digital',
+		package: null,
+		company: null,
+		profile: 'usr-admin-001',
+		parentId: null,
+		text: 'От лица компании спасибо за системность: все ревью понятные и по делу.',
+		likesCount: 4,
+		dislikesCount: 0,
+		rating: 5,
+		createdAt: '2025-02-06T11:00:00.000Z',
+		reactionHistory: [{ userName: 'Aruzhan N.', reaction: 'like', at: '2025-02-06T11:16:00.000Z' }]
+	},
+	{
+		_id: 'cmt-006',
+		userName: 'Aruzhan N.',
+		package: 'pkg-funnel-audit',
+		company: null,
+		parentId: null,
+		text: 'Сделали аудит воронки за 2 дня, отчёт понятный. В следующей версии хотелось бы больше примеров по retention.',
+		likesCount: 6,
+		dislikesCount: 0,
+		rating: 5,
+		createdAt: '2025-02-04T10:12:00.000Z',
+		reactionHistory: [
+			{ userName: 'Nursultan', reaction: 'like', at: '2025-02-04T11:00:00.000Z' },
+			{ userName: 'Dina', reaction: 'like', at: '2025-02-04T11:42:00.000Z' }
+		]
+	},
+	{
+		_id: 'cmt-007',
+		userName: 'CodeBridge PM',
+		package: 'pkg-funnel-audit',
+		company: null,
+		parentId: 'cmt-006',
+		text: 'Спасибо! Добавим блок с retention-кейсами в ближайшем обновлении методологии.',
+		likesCount: 2,
+		dislikesCount: 0,
+		rating: null,
+		createdAt: '2025-02-04T12:05:00.000Z',
+		reactionHistory: [{ userName: 'Aruzhan N.', reaction: 'like', at: '2025-02-04T12:30:00.000Z' }]
+	},
 	{
 		_id: 'cmt-001',
 		userName: 'Aida K.',
@@ -297,3 +398,9 @@ export const getCommentsByPackage = (packageId: string) =>
 
 export const getCommentsByCompany = (companyId: string) =>
 	comments.filter((comment) => comment.company === companyId);
+
+export const getCommentsByUserName = (userName: string) =>
+	comments.filter((comment) => comment.userName === userName);
+
+export const getCommentsByProfile = (profileId: string) =>
+	comments.filter((comment) => comment.profile === profileId);

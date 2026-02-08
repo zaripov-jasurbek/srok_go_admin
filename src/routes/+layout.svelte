@@ -1,6 +1,7 @@
 <script lang="ts">
 	import './layout.css';
 	import favicon from '$lib/assets/favicon.svg';
+	import { currentUser } from '$lib/data/catalog';
 	import { orderStore } from '$lib/stores/order-store';
 
 	let { children } = $props();
@@ -18,6 +19,17 @@
 			<nav class="flex items-center gap-4 text-sm font-medium text-slate-700">
 				<a href="/cards" class="hover:text-slate-900">Packages</a>
 				<a href="/companies" class="hover:text-slate-900">Companies</a>
+				<a
+					href="/profile"
+					class="inline-flex h-10 w-10 overflow-hidden rounded-full border border-slate-300 hover:ring-2 hover:ring-indigo-200"
+					title="Profile"
+				>
+					<img
+						src={currentUser.avatar ?? 'https://placehold.co/80x80/e2e8f0/475569?text=U'}
+						alt={currentUser.name}
+						class="h-full w-full object-cover"
+					/>
+				</a>
 				<a
 					href="/basket"
 					class="relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-300 text-xl text-slate-700 hover:bg-slate-50"
